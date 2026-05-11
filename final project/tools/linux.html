@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux | Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tux-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .tux-icon {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.3));
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Linux</h2>
+        <div class="case-file">
+            <div class="tux-header">
+                <svg class="tux-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Simple Tux Penguin SVG -->
+                    <ellipse cx="50" cy="65" rx="25" ry="30" fill="#000" />
+                    <ellipse cx="50" cy="60" rx="20" ry="25" fill="#fff" />
+                    <ellipse cx="50" cy="35" rx="18" ry="18" fill="#000" />
+                    <ellipse cx="50" cy="35" rx="14" ry="14" fill="#fff" />
+                    <circle cx="45" cy="32" r="2" fill="#000" />
+                    <circle cx="55" cy="32" r="2" fill="#000" />
+                    <polygon points="50,36 47,40 53,40" fill="#FFA500" />
+                    <ellipse cx="50" cy="85" rx="8" ry="5" fill="#FFA500" />
+                    <ellipse cx="35" cy="80" rx="8" ry="5" fill="#FFA500" />
+                    <ellipse cx="65" cy="80" rx="8" ry="5" fill="#FFA500" />
+                </svg>
+                <h3 class="case-title">The Security Analyst's Operating System</h3>
+            </div>
+
+            <p>
+                Linux is the backbone of cybersecurity. Most servers, firewalls, SIEMs, and security tools run on Linux.
+                Kali, Parrot, and Ubuntu are standard in SOCs and penetration testing. Understanding the Linux command
+                line,
+                file system, permissions, and networking stack is non-negotiable for blue team and red team roles.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Why Security Runs on Linux</h4>
+            <p>
+                - <strong>Transparency:</strong> Open source means you can audit every line of code. No hidden
+                backdoors<br>
+                - <strong>Tool Availability:</strong> Nmap, Wireshark, Metasploit, Suricata all developed for Linux
+                first<br>
+                - <strong>Command Line Power:</strong> Pipe, grep, awk, sed let you process gigabytes of logs in
+                seconds<br>
+                - <strong>Stability:</strong> Servers run for years without reboot. Critical for 24/7 SOC monitoring<br>
+                - <strong>Permissions Model:</strong> Granular user/group controls prevent privilege escalation<br>
+                - <strong>Containerization:</strong> Docker/K8s security tooling is Linux-native
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Essential Security Commands</h4>
+
+            <p><strong>1. Network investigation:</strong></p>
+            <div class="code-snippet">
+                <code>
+# Show all listening ports and processes<br>
+sudo netstat -tulpn<br><br>
+# Real-time traffic capture<br>
+sudo tcpdump -i eth0 -w capture.pcap<br><br>
+# Check for suspicious connections<br>
+ss -tunap | grep ESTAB
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                First commands to run during incident response to find C2 beacons and open backdoors.
+            </p>
+
+            <p><strong>2. Log analysis:</strong></p>
+            <div class="code-snippet">
+                <code>
+# Find failed SSH logins<br>
+grep "Failed password" /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -nr<br><br>
+# Monitor auth logs in real-time<br>
+tail -f /var/log/auth.log<br><br>
+# Search for IOC in all logs<br>
+grep -r "192.168.1.100" /var/log/
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Parse millions of log lines instantly. This is why SOC analysts live in the terminal.
+            </p>
+
+            <p><strong>3. File integrity & forensics:</strong></p>
+            <div class="code-snippet">
+                <code>
+# Hash a file to check for tampering<br>
+sha256sum /etc/passwd<br><br>
+# Find SUID binaries - common privesc vector<br>
+find / -perm -4000 -type f 2>/dev/null<br><br>
+# Check for recently modified files<br>
+find /var/www -type f -mtime -1
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Critical for detecting web shells and backdoored binaries after a breach.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Defensive Applications</h4>
+            <p>
+                Hardening Linux is day-one work for blue team. Disable root SSH, configure iptables/ufw,
+                set up fail2ban, audit SUID files, and ship logs to a SIEM. Tools like Lynis and OpenSCAP
+                automate compliance checks. In incident response, you’ll live in `/proc`, `/var/log`, and
+                use `lsof` and `ps` to hunt malicious processes that don’t show up in `top`.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">My Experience</h4>
+            <p>
+                I run Ubuntu and Kali in my home lab VMs to practice defensive monitoring. My packet sniffer
+                was developed and tested on Linux first because Scapy has better raw socket support there.
+                I use bash scripting to automate log parsing from Security Onion, and write Python scripts
+                that run as systemd services for continuous monitoring. Understanding Linux permissions and
+                networking was essential for getting Npcap working correctly on Windows for my project.
+            </p>
+
+            <div class="tech-stack" style="margin-top: 32px;">
+                <span class="tech-badge">Bash</span>
+                <span class="tech-badge">System Hardening</span>
+                <span class="tech-badge">Log Analysis</span>
+                <span class="tech-badge">Permissions</span>
+                <span class="tech-badge">Kali Linux</span>
+                <span class="tech-badge">Forensics</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Behzad Ra | Built for defense | <a href="../index.html

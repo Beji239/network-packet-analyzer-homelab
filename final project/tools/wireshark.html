@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireshark | Security Tools</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <nav>
+    <div class="logo"></div>
+    <ul>
+      <li><a href="../index.html">← Back to Portfolio</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding-top: 120px;">
+    <h2 class="section-title">Wireshark</h2>
+    <div class="case-file">
+      <h3 class="case-title">Network Protocol Analyzer</h3>
+      <p>
+        Wireshark is the world's most widely-used network protocol analyzer. It lets you see what's
+        happening on your network at a microscopic level and is the de facto standard across many
+        industries and educational institutions.
+      </p>
+
+      <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Use Cases</h4>
+      <p>
+        - Capture live packet data from network interfaces<br>
+        - Display packets with detailed protocol information<br>
+        - Filter traffic to isolate suspicious activity<br>
+        - Follow TCP streams to reconstruct sessions<br>
+        - Detect malware C2 beacons and data exfiltration
+      </p>
+
+      <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Example: Filter for SYN Floods</h4>
+      <div class="code-snippet">
+        <code>tcp.flags.syn == 1 and tcp.flags.ack == 0</code>
+      </div>
+
+      <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">My Experience</h4>
+      <p>
+        Used Wireshark extensively while building my packet sniffer to validate that my Scapy
+        code was parsing headers correctly. Analyzed PCAPs from my home lab to identify DNS
+        tunneling attempts and unusual outbound connections.
+      </p>
+    </div>
+  </section>
+</body>
+
+</html>

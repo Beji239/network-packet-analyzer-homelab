@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scapy | Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Scapy</h2>
+        <div class="case-file">
+            <h3 class="case-title">Python Packet Manipulation Library</h3>
+            <p>
+                Scapy is a powerful interactive packet manipulation program written in Python. It can forge
+                or decode packets of a wide number of protocols, send them on the wire, capture them, match
+                requests and replies, and much more. It’s the go-to library for network research, penetration
+                testing, and building custom security tools.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Core Use Cases</h4>
+            <p>
+                - <strong>Packet Crafting:</strong> Build custom packets layer by layer for testing firewalls/IDS<br>
+                - <strong>Packet Sniffing:</strong> Capture live traffic with programmable filters<br>
+                - <strong>Protocol Dissection:</strong> Decode Ethernet, IP, TCP, UDP, DNS, HTTP, etc.<br>
+                - <strong>Network Scanning:</strong> Write custom scanners beyond what Nmap offers<br>
+                - <strong>Attack Simulation:</strong> Generate SYN floods, ARP spoofing, DNS poisoning for lab
+                testing<br>
+                - <strong>PCAP Analysis:</strong> Read/write .pcap files and extract forensic evidence
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Code Examples</h4>
+
+            <p><strong>1. Basic packet sniffer:</strong></p>
+            <div class="code-snippet">
+                <code>
+from scapy.all import sniff, IP<br><br>
+def packet_callback(pkt):<br>
+&nbsp;&nbsp;if IP in pkt:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(f"{pkt[IP].src} -> {pkt[IP].dst}")<br><br>
+sniff(prn=packet_callback, count=10)
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Captures 10 packets and prints source/destination IPs. Foundation of any sniffer.
+            </p>
+
+            <p><strong>2. Craft and send a TCP SYN packet:</strong></p>
+            <div class="code-snippet">
+                <code>
+from scapy.all import IP, TCP, sr1<br><br>
+pkt = IP(dst="192.168.1.1")/TCP(dport=80, flags="S")<br>
+response = sr1(pkt, timeout=2)<br>
+response.show()
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Manually builds a SYN packet to test if port 80 is open. Useful for stealth scans and firewall testing.
+            </p>
+
+            <p><strong>3. Detect SYN flood by counting SYNs per source IP:</strong></p>
+            <div class="code-snippet">
+                <code>
+from scapy.all import sniff, TCP<br>
+from collections import Counter<br><br>
+syn_counter = Counter()<br><br>
+def detect_syn_flood(pkt):<br>
+&nbsp;&nbsp;if TCP in pkt and pkt[TCP].flags == "S":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;syn_counter[pkt[IP].src] += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if syn_counter[pkt[IP].src] > 100:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"[!] Possible SYN flood from {pkt[IP].src}")<br><br>
+sniff(filter="tcp", prn=detect_syn_flood)
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Alerts when a single IP sends >100 SYN packets. Logic I used in my packet sniffer for anomaly detection.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Defensive Applications</h4>
+            <p>
+                Blue teams use Scapy to parse logs, analyze malware C2 traffic from PCAPs, and build custom
+                detection scripts. You can replay suspicious traffic in a sandbox, fuzz-test IDS rules,
+                or generate baseline traffic to tune SIEM alerts. It’s faster than GUI tools for automation.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">My Experience</h4>
+            <p>
+                I used Scapy + Npcap to build my packet sniffer featured in Case File 001. The tool captures
+                live traffic, dissects protocols, and generates real-time Matplotlib graphs showing protocol
+                distribution and top talkers. I implemented custom logic to flag port scans and SYN floods by
+                analyzing TCP flag patterns. This project deepened my understanding of TCP/IP internals,
+                Berkeley Packet Filters, and how attackers craft malformed packets to evade detection.
+            </p>
+
+            <div class="tech-stack" style="margin-top: 32px;">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Packet Crafting</span>
+                <span class="tech-badge">PCAP Analysis</span>
+                <span class="tech-badge">Npcap</span>
+                <span class="tech-badge">Protocol Dissection</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Behzad Ra | Built for defense | <a href="../index.html"
+                style="color: var(--terminal-green);">Home</a></p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git | Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .git-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .git-icon {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 0 10px rgba(243, 79, 41, 0.4));
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #F34F29;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #F34F29;
+            transition: all 0.3s ease;
+            margin: 24px 0;
+        }
+
+        .github-btn:hover {
+            background: transparent;
+            color: #F34F29;
+            box-shadow: 0 0 15px rgba(243, 79, 41, 0.5);
+        }
+
+        .github-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Git</h2>
+        <div class="case-file">
+            <div class="git-header">
+                <svg class="git-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Git Logo -->
+                    <rect x="0" y="0" width="100" height="100" rx="15" fill="#F34F29" />
+                    <path
+                        d="M65.2 35.2L64.8 34.8C63.6 33.6 61.6 33.6 60.4 34.8L58.8 36.4L63.6 41.2L65.2 39.6C66.4 38.4 66.4 36.4 65.2 35.2Z"
+                        fill="#fff" />
+                    <path
+                        d="M56.4 38.8L38.8 56.4C37.6 57.6 37.6 59.6 38.8 60.8L39.2 61.2C40.4 62.4 42.4 62.4 43.6 61.2L61.2 43.6L56.4 38.8Z"
+                        fill="#fff" />
+                    <circle cx="41.2" cy="58.8" r="4.8" fill="#fff" />
+                    <circle cx="58.8" cy="41.2" r="4.8" fill="#fff" />
+                    <path d="M43.6 61.2L61.2 43.6L63.6 46L46 63.6L43.6 61.2Z" fill="#fff" />
+                </svg>
+                <h3 class="case-title">Version Control for Security Engineering</h3>
+            </div>
+
+            <p>
+                Git is a distributed version control system that tracks changes in source code and configuration files.
+                In cybersecurity, it’s critical for managing detection rules, incident response playbooks,
+                security tools, and infrastructure-as-code. Every SOC, DevSecOps team, and security researcher
+                uses Git to collaborate, audit changes, and maintain integrity of defensive code.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Why Git Matters in Security</h4>
+            <p>
+                - <strong>Audit Trail:</strong> Every commit is logged with author, timestamp, and diff. Critical for
+                compliance<br>
+                - <strong>Collaboration:</strong> Multiple analysts can work on SIEM rules or IR playbooks via
+                branches<br>
+                - <strong>Rollback:</strong> Bad detection rule causing false positives? `git revert` and you’re
+                safe<br>
+                - <strong>Code Integrity:</strong> Signed commits with GPG verify code hasn’t been tampered with<br>
+                - <strong>Backup:</strong> Distributed model means every clone is a full backup<br>
+                - <strong>Tool Management:</strong> All security tools: Nmap scripts, YARA rules, Suricata rules live in
+                Git
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Essential Commands for Security Work</h4>
+
+            <p><strong>1. Track changes to detection rules:</strong></p>
+            <div class="code-snippet">
+                <code>
+git init<br>
+git add suricata/rules/emerging-threats.rules<br>
+git commit -m "Add detection for CVE-2024-1234 exploit traffic"<br>
+git push origin main
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Commit messages become your change log. SOC managers can review exactly what detection was added and
+                why.
+            </p>
+
+            <p><strong>2. Branch for testing new rules:</strong></p>
+            <div class="code-snippet">
+                <code>
+git checkout -b test-new-log4j-rule<br>
+# Edit rules, test in lab<br>
+git add .<br>
+git commit -m "Test rule for Log4Shell - do not deploy to prod"<br>
+git push origin test-new-log4j-rule<br><br>
+# After validation, merge to main<br>
+git checkout main<br>
+git merge test-new-log4j-rule
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Never test rules directly in production. Branches let you validate in a lab first.
+            </p>
+
+            <p><strong>3. Investigate who changed what:</strong></p>
+            <div class="code-snippet">
+                <code>
+# See who modified a file and when<br>
+git blame firewall/iptables.conf<br><br>
+# View full history of a file<br>
+git log -p firewall/iptables.conf<br><br>
+# Find when a backdoor was introduced<br>
+git log -S "password123" --source --all
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                `git blame` and `git log -S` are forensic tools. Find when malicious code was committed.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Security Best Practices</h4>
+            <p>
+                - <strong>Never commit secrets:</strong> Use .gitignore for *.key, *.pem, config.ini. Scan with
+                truffleHog<br>
+                - <strong>Sign your commits:</strong> `git commit -S` with GPG proves code came from you<br>
+                - <strong>Use protected branches:</strong> Require PR review before merging to main on GitHub/GitLab<br>
+                - <strong>Audit access:</strong> Remove old SSH keys and contributors from repos<br>
+                - <strong>Scan dependencies:</strong> Use `git grep` to find vulnerable library versions in code
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">My Experience</h4>
+            <p>
+                I use Git and GitHub to manage my packet sniffer project and home lab configurations. Every
+                feature gets its own branch: `feature/anomaly-detection` or `fix/pcap-parsing-bug`. This lets
+                me experiment without breaking the main code. I also version-control my pfSense configs and
+                Security Onion rules so I can roll back if a change blocks legitimate traffic. Learning Git
+                taught me how enterprise SOCs manage detection-as-code and maintain chain of custody for
+                forensic scripts.
+            </p>
+
+            <!-- GitHub Link Button Added Here -->
+            <a href="https://github.com/Beji239/HTML-AND-CSS-PROJECTS" target="_blank" class="github-btn">
+                <svg viewBox="0 0 16 16" fill="currentColor">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
+                View My Projects on GitHub
+            </a>
+
+            <div class="tech-stack" style="margin-top: 32px;">
+                <span class="tech-badge">Version Control</span>
+                <span class="tech-badge">GitHub</span>
+                <span class="tech-badge">CI/CD</span>
+                <span class="tech-badge">Code Audit</span>
+                <span class="tech-badge">GPG Signing</span>
+                <span class="tech-badge">DevSecOps</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Behzad Ra | Built for defense | <a href="../index.html"
+                style="color: var(--terminal-green);">Home</a></p>
+    </footer>
+</body>
+
+</html>

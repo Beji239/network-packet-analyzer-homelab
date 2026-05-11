@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python | Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Python</h2>
+        <div class="case-file">
+            <h3 class="case-title">The Language of Cybersecurity Automation</h3>
+            <p>
+                Python is the dominant language in infosec due to its readability, massive library ecosystem,
+                and rapid development speed. Security analysts use it to automate log analysis, parse PCAPs,
+                query APIs, build custom exploits, and glue together tools. It runs on every OS and integrates
+                with virtually every security platform.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Core Use Cases in Security</h4>
+            <p>
+                - <strong>Automation:</strong> Script repetitive SOC tasks like IOC enrichment, alert triage, report
+                generation<br>
+                - <strong>Network Programming:</strong> Build scanners, sniffers, and protocol clients with
+                Scapy/Sockets<br>
+                - <strong>Log Analysis:</strong> Parse firewall, SIEM, and endpoint logs with pandas and regex<br>
+                - <strong>Malware Analysis:</strong> Deobfuscate scripts, extract C2 configs, automate sandbox
+                detonation<br>
+                - <strong>API Integration:</strong> Pull threat intel from VirusTotal, AbuseIPDB, Shodan, MISP<br>
+                - <strong>Forensics:</strong> Carve files, analyze memory dumps, parse registry hives<br>
+                - <strong>Exploit Development:</strong> Prototype PoCs and automate vulnerability checks
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Key Libraries for Security</h4>
+            <div class="code-snippet">
+                <code>
+import scapy.all as scapy        # Packet crafting/sniffing<br>
+import requests                  # HTTP/API interaction<br>
+import pandas as pd              # Log analysis, CSV/JSON parsing<br>
+import matplotlib.pyplot as plt  # Data visualization for reports<br>
+import re                        # Regex for IOC extraction<br>
+import hashlib                   # File hashing for malware triage<br>
+import socket                    # Low-level network programming
+        </code>
+            </div>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Code Examples</h4>
+
+            <p><strong>1. Extract IPs from firewall logs:</strong></p>
+            <div class="code-snippet">
+                <code>
+import re<br><br>
+log_data = "Blocked connection from 192.168.1.105 to 8.8.8.8"<br>
+ips = re.findall(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b', log_data)<br>
+print(f"IOCs found: {ips}")<br>
+# Output: IOCs found: ['192.168.1.105', '8.8.8.8']
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Regex extracts all IPv4 addresses from unstructured logs for threat hunting.
+            </p>
+
+            <p><strong>2. Hash a file to check against VirusTotal:</strong></p>
+            <div class="code-snippet">
+                <code>
+import hashlib<br><br>
+def sha256_hash(filename):<br>
+&nbsp;&nbsp;with open(filename, "rb") as f:<br>
+&nbsp;&nbsp

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burp Suite | Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Burp Suite</h2>
+        <div class="case-file">
+            <h3 class="case-title">Web Application Security Testing Platform</h3>
+            <p>
+                Burp Suite is the industry-standard toolkit for testing web application security. It acts as
+                an intercepting proxy, letting you inspect and modify traffic between your browser and target
+                web servers. Both red teams and blue teams use it: pentesters find vulnerabilities, defenders
+                reproduce attacks and validate WAF rules. Community Edition is free; Pro adds automated scanning.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Core Modules</h4>
+            <p>
+                - <strong>Proxy:</strong> Intercept HTTP/S requests and responses. Modify headers, cookies, parameters
+                in real-time<br>
+                - <strong>Repeater:</strong> Manually resend requests with tweaked payloads to test for SQLi, XSS, auth
+                bypass<br>
+                - <strong>Intruder:</strong> Automate fuzzing attacks with custom payload lists for brute force and
+                enumeration<br>
+                - <strong>Scanner:</strong> [Pro] Automated crawl + audit for 100+ vulnerability types<br>
+                - <strong>Decoder:</strong> Encode/decode Base64, URL, HTML, JWT tokens<br>
+                - <strong>Comparer:</strong> Diff responses to find subtle logic flaws
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Common Workflows</h4>
+
+            <p><strong>1. Intercept login request to test for SQL injection:</strong></p>
+            <div class="code-snippet">
+                <code>
+POST /login HTTP/1.1<br>
+Host: target.com<br>
+Content-Type: application/x-www-form-urlencoded<br><br>
+username=admin' OR '1'='1--&password=test
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Use Repeater to send modified payloads. Check response for auth bypass or error-based SQLi.
+            </p>
+
+            <p><strong>2. Brute force directories with Intruder:</strong></p>
+            <div class="code-snippet">
+                <code>
+GET /§admin§ HTTP/1.1<br>
+Host: target.com<br><br>
+Payload list: admin, dashboard, config,.git, backup.zip
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">

@@ -1,0 +1,15 @@
+REVIEW ASSIGNMENT
+
+Visit this website (this is a basic template of what your website will look like at the end of this assignment):
+
+
+https://htmlandcssportfolio.com/ 
+
+
+Review the entire webpage, click on links, resize the browser and watch for any changes, hover over every element, and reload the page and watch the different animations that occur.
+
+
+NOTE: You will be able to customize the appearance and content of this website for yourself during this assignment. For example: you can change the colors, fonts, images, video, etc. And, again, it will be enhanced on future courses.
+
+
+Step: 602

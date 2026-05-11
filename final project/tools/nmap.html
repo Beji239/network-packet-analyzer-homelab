@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nmap | Security Tools</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo"></div>
+        <ul>
+            <li><a href="../index.html">← Back to Portfolio</a></li>
+        </ul>
+    </nav>
+
+    <section style="padding-top: 120px;">
+        <h2 class="section-title">Nmap</h2>
+        <div class="case-file">
+            <h3 class="case-title">Network Mapper & Port Scanner</h3>
+            <p>
+                Nmap is a free, open-source utility for network discovery and security auditing.
+                Security teams use it to discover hosts, identify open ports, detect running services,
+                fingerprint operating systems, and find vulnerabilities. It's the first tool used in
+                both penetration tests and defensive network inventory.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Core Use Cases</h4>
+            <p>
+                - <strong>Host Discovery:</strong> Find live devices on a network without scanning every port<br>
+                - <strong>Port Scanning:</strong> Identify open TCP/UDP ports and services<br>
+                - <strong>Service Detection:</strong> Determine application name and version running on ports<br>
+                - <strong>OS Fingerprinting:</strong> Detect operating system and hardware of targets<br>
+                - <strong>Vulnerability Scanning:</strong> Run NSE scripts to check for known CVEs<br>
+                - <strong>Firewall Evasion:</strong> Test IDS/IPS rules and firewall configurations
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Common Scan Examples</h4>
+
+            <p><strong>1. Basic stealth SYN scan:</strong></p>
+            <div class="code-snippet">
+                <code>nmap -sS 192.168.1.0/24</code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Scans entire subnet for live hosts using half-open SYN packets. Fast and less likely to be logged.
+            </p>
+
+            <p><strong>2. Service/version detection:</strong></p>
+            <div class="code-snippet">
+                <code>nmap -sV -p 1-1000 10.0.0.15</code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Probes ports 1-1000 and identifies service versions like Apache 2.4.41 or OpenSSH 8.2p1.
+            </p>
+
+            <p><strong>3. Aggressive scan with OS detection + scripts:</strong></p>
+            <div class="code-snippet">
+                <code>nmap -A -T4 scanme.nmap.org</code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                -A enables OS detection, version detection, script scanning, and traceroute. -T4 for faster execution.
+            </p>
+
+            <p><strong>4. Check for vulnerable SMB version:</strong></p>
+            <div class="code-snippet">
+                <code>nmap --script smb-vuln-ms17-010 -p 445 192.168.1.10</code>
+            </div>
+            <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">
+                Uses NSE to check if target is vulnerable to EternalBlue. Critical for patch management.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">Defensive Applications</h4>
+            <p>
+                Blue teams run scheduled Nmap scans to maintain asset inventory, verify that only approved
+                services are exposed, and detect rogue devices. Comparing scan results over time reveals
+                unauthorized changes. Rate-limiting and IDS tuning prevent scan detection from causing alert fatigue.
+            </p>
+
+            <h4 style="color: var(--terminal-green); margin: 24px 0 12px;">My Experience</h4>
+            <p>
+                I use Nmap in my home lab to map my virtual network before and after deploying new VMs.
+                This verifies firewall rules in pfSense are working and no unintended ports are exposed.
+                I also practice parsing Nmap XML output with Python to auto-generate network diagrams
+                and feed results into my packet sniffer for targeted analysis.
+            </p>
+
+            <div class="tech-stack" style="margin-top: 32px;">
+                <span class="tech-badge">TCP/IP</span>
+                <span class="tech-badge">Port Scanning</span>
+                <span class="tech-badge">NSE Scripts</span>
+                <span class="tech-badge">OS Fingerprinting</span>
+                <span class="tech-badge">Asset Discovery</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Behzad Ra | Built for defense | <a href="../index.html"
+                style="color: var(--terminal-green);">Home</a></p>
+    </footer>
+</body>
+
+</html>
