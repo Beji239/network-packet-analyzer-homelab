@@ -61,3 +61,12 @@ automatically in your browser as `security_dashboard.html`.
 
 For educational and authorized network monitoring purposes only.
 Live sniffing requires administrator/root privileges.
+
+
+
+## Portfolio Website
+
+`final project/` contains a static HTML/CSS security analyst portfolio site
+with a terminal-style landing page, and sections covering mission, labs,
+tools, and contact. Built as a capstone project demonstrating front-end
+presentation of security work.
